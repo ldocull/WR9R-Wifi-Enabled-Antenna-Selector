@@ -1,0 +1,57 @@
+<!DOCTYPE html><html><link rel=  "icon" href="data:," 
+<head>
+      <title>My DuraMeter</title>
+        <script src=  "https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"> </script>
+</head>
+<body><style> table, th, td {border: 1px solid grey;} </style>
+  <img src=  "https://duraproducts.com/wp-content/uploads/2015/06/DP_Homepage_Logo4.x50594.png">
+  <h2>My DuraMeter</h2>
+  
+  <script>
+    $(document).ready(
+        function() { 
+            setInterval('refreshPage()', 1000);
+        });
+
+        function updateTable(obj){
+            const keys = Object.keys(obj);
+            for (let i = 0; i < keys.length; i++) 
+            { 
+                const key = keys[i];
+                const tableValue = obj[key];
+                const subKeys = Object.keys(tableValue); 
+            
+                for (let j = 0; j < subKeys.length; j++) 
+                {
+                    const subKey = subKeys[j]; 
+                    const value = tableValue[subKey]; 
+
+                    document.getElementById(key+"_"+subKey).innerHTML = value;
+                }
+            }
+        } 
+
+        function refreshPage() { 
+            var xhttp = new XMLHttpRequest(); 
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) 
+                { 
+                    var obj = JSON.parse(this.response); 
+                    updateTable(obj);
+                }
+            }; 
+            xhttp.open( "GET","data.json", true); 
+            xhttp.send();
+        }
+  </script>
+  <b>
+  <table> 
+  <tr><td>Meter Total</td><td id="meterTotal_val">0.00000</td><td id=  "meterTotal_unit">---</td></tr> 
+  <tr><td>Batch Total</td><td id="batchTotal_val">0.00000</td><td id=  "batchTotal_unit">---</td></tr> 
+  <tr><td>Total Total</td><td id="totalTotal_val">0.00000</td><td id=  "totalTotal_unit">---</td></tr> 
+  <tr><td>Remaining Batch</td><td id="remainTotal_val">0.00000</td><td id=  "remainTotal_unit">---</td></tr> 
+  <tr><td>My Counter</td><td id=  "myCounter_val">0.00000</td><td id=  "remainTotal_unit">---</td></tr> 
+  </table>
+</b> 
+</body>
+</html> 
