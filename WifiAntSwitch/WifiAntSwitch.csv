@@ -1,0 +1,15 @@
+"Id";"Designator";"Package";"Quantity";"Designation";"Supplier and ref";
+1;"U2";"MODULE_ESP32-DEVKITC-32D";1;"ESP32-DEVKITC-32D";;;
+2;"J3";"PinHeader_1x02_P2.54mm_Vertical";1;"POWER";;;
+3;"REF**,REF**,REF**,REF**";"MountingHole_3mm";4;"MountingHole_3mm";;;
+4;"U1";"TO-220-3_Horizontal_TabDown";1;"LM7805_TO220";;;
+5;"D9,D7,D5,D3,D1";"D_3220_8050Metric";5;"RS07D-HM3-08";;;
+6;"U7,U6,U5,U4,U3";"SO-4_4.4x4.3mm_P2.54mm";5;"ASSR-1218";;;
+7;"R20,R18,R16,R14,R12,R10,R8,R6,R4,R2";"R_0805_2012Metric";10;"6.8K";;;
+8;"R19,R15,R11,R7,R3";"R_0805_2012Metric";5;"510";;;
+9;"R17,R13,R9,R5,R1";"R_0805_2012Metric";5;"22K";;;
+10;"J2";"PinHeader_1x08_P2.54mm_Vertical";1;"OUTPUTS";;;
+11;"J1";"PinHeader_1x06_P2.54mm_Vertical";1;"INPUTS";;;
+12;"D10,D8,D6,D4,D2";"LED_0805_2012Metric";5;"599-0120-007F";;;
+13;"C12,C10,C8,C6,C4";"C_0805_2012Metric";5;"0.01uf, 100V";;;
+14;"C11,C9,C7,C5,C3,C2,C1";"C_0805_2012Metric";7;"1uF, 25V";;;

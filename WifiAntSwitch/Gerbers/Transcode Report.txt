@@ -1,0 +1,22 @@
+
+
+   ---- Transcoding 'C:\Users\LOCull.STRYKERCORP\Dropbox\KiCAD\WifiAntSwitch\Gerbers\WifiAntSwitch-Edge_Cuts.gbr' ----   Fri Aug 07 08:57:12 2020
+
+D10   --> D100
+-----------------------------------------------------------------
+
+
+   ---- Transcoding 'C:\Users\LOCull.STRYKERCORP\Dropbox\KiCAD\WifiAntSwitch\Gerbers\WifiAntSwitch-F_Cu.gbr' ----   Fri Aug 07 08:57:12 2020
+
+D17   --> D101
+D18   --> D102
+-----------------------------------------------------------------
+
+
+   ---- Transcoding 'C:\Users\LOCull.STRYKERCORP\Dropbox\KiCAD\WifiAntSwitch\Gerbers\WifiAntSwitch-F_SilkS.gbr' ----   Fri Aug 07 08:57:12 2020
+
+D10   --> D103
+D11   --> D104
+D12   --> D105
+D13   --> D106
+-----------------------------------------------------------------
