@@ -32,7 +32,8 @@ This PCBA provides a method to remotely control antenna selection within a LAN u
 - If you're plugged into the wifi module of the new PCBA with a USB cable, you can use a terminal session to see the new IP.  Otherwise. you will need to log into your router to find the new address assigned to the device.
 
 ## Antenna Names:
-The buttons on the main screen can be renamed at any time. Just go to htpps://*yourIPadd*/NAMES
+The buttons on the main screen can be renamed at any time. Just go to **htpps://*yourIPadd*/NAMES**
+
 ![enter image description here](https://imgur.com/sdjbDu8.jpg)
 
 73
