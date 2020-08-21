@@ -5,8 +5,10 @@ This PCBA provides a method to remotely control antenna selection within a LAN u
 ## Key features:
 
 - Directly fits within the existing enclosure
-- Supports original manual control but adds remote control
+- Supports original manual control but adds remote control 
+  (Changing the antenna choice at the front panel at any time, resets the device to the manual selection mode)
 - Browser buttons can be named through the browser to support antenna upgrades
+
 
 ![Typical Antenna Remote Controller Box](https://imgur.com/vl0tTJB.jpg)
 
