@@ -4,7 +4,7 @@ This PCBA provides a method to remotely control antenna selection within a LAN u
 
 ## Key features:
 
- Directly fits within the existing enclosure
+- Directly fits within the existing enclosure
 - Supports original manual control but adds remote control
 - Browser buttons can be named through the browser to support antenna upgrades
 
@@ -12,17 +12,17 @@ This PCBA provides a method to remotely control antenna selection within a LAN u
 
 ![Installation](https://imgur.com/1aA2Qp5.jpg)
 
-![Main Operating Screen](https://imgur.com/COa3D5a.jpg)
-
 ## Assembly Installation:
 
- The control wires were clipped from the back terminal strip and landed to the rear of the PCBA as shown above.
+- The control wires were clipped from the back terminal strip and landed to the rear of the PCBA as shown above.
 - New wires were the placed from the "To Relays" header to the terminal strip
 - 12VDC power was picked up at the DC jack on the rear of the enclosure -- but could be picked up after the from panel switch on the front PCBA.
+- 
+![Main Operating Screen](https://imgur.com/COa3D5a.jpg)
 
 ## Setup:
 
- Using a phone or other internet device. Connect to the Wifi SSID that looks like:  *WR9RasNNN*,  where *NNN* is a somewhat random number.
+- Using a phone or other internet device. Connect to the Wifi SSID that looks like:  *WR9RasNNN*,  where *NNN* is a somewhat random number.
 - Password is '*12345678*'
 - On the same device, use a browser to then go to the host address:  https://192.168.4.1/SSID
 - There, enter the SSID and Password for the network you wish to use within your LAN
