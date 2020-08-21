@@ -39,5 +39,5 @@ The buttons on the main screen can be renamed at any time. Just go to **htpps://
 ![enter image description here](https://imgur.com/sdjbDu8.jpg)
 
 73
--[WR9R](http://wr9r.com/)
+-[WR9R](http://wr9r.com/) 
 
