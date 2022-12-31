@@ -2,7 +2,7 @@
 # WR9R Auto Band Switch Manager
 # This will automatically select the antenna based on band selected
 # on the K3
-# 12-29-2022   Larry D O'Cull    WR9R
+# 12-30-2022   Larry D O'Cull    WR9R
 #
 
 import serial
@@ -53,9 +53,9 @@ def get_tune_request(string):
 def tune(secs):
     print("Tuning...")
     time.sleep(1)            
-    ser.write(b"SWH16;")
+    ser.write(b"SWH16;")    # press the XMIT button (with low power setting in K3
     time.sleep(secs)            
-    ser.write(b"SWH16;")
+    ser.write(b"SWH16;")    # press again to disable
     print("Complete")
     return None
 
@@ -86,17 +86,27 @@ time.sleep(5)
 
 # Open the serial port at 9600 baud rate
 ser = serial.Serial(MY_COMM_PORT, baudrate=MY_COMM_RATE)
+time.sleep(0.25)
+ser.flushInput()    # flush the buffer
+ser.write(b"BN;")   # prime the system at startup with a band request
+time.sleep(0.25)
 
 last_data= b''
 
 while True:
     # Write a message to the serial port
+    i = 0
     while True:
-        # Read a single character looking for end of last message on bus
-        char = ser.read(1)
-        # Check if the character is the end of the message
-        if char == b';':
-            break
+        if ser.inWaiting() != 0:
+            char = ser.read(1)
+            # Check if the character is the end of the message
+            if char == b';':
+                break
+        time.sleep(0.25)
+        i = i + 1
+        if i > 10:
+            break;        # Read a single character looking for end of last message on bus
+
     time.sleep(0.25)
     ser.flushInput()    # flush the buffer
     ser.write(b"BN;")   # add a car to the train
