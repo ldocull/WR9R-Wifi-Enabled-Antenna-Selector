@@ -53,10 +53,17 @@ def get_tune_request(string):
 def tune(secs):
     print("Tuning...")
     time.sleep(1)            
-    ser.write(b"SWH16;")    # press the XMIT button (with low power setting in K3
+    ser.write(b"SWH16;")
     time.sleep(secs)            
-    ser.write(b"SWH16;")    # press again to disable
+    ser.write(b"SWH16;")
     print("Complete")
+    return None
+
+def band_poll_K3():
+    time.sleep(0.25)
+    ser.flushInput()
+    ser.write(b"BN;")   # request band currently selected
+    time.sleep(0.25)
     return None
 
 def setWR9R(data):
@@ -86,10 +93,7 @@ time.sleep(5)
 
 # Open the serial port at 9600 baud rate
 ser = serial.Serial(MY_COMM_PORT, baudrate=MY_COMM_RATE)
-time.sleep(0.25)
-ser.flushInput()    # flush the buffer
-ser.write(b"BN;")   # prime the system at startup with a band request
-time.sleep(0.25)
+band_poll_K3()      # prime the system at startup with a band request
 
 last_data= b''
 
@@ -100,17 +104,14 @@ while True:
         if ser.inWaiting() != 0:
             char = ser.read(1)
             # Check if the character is the end of the message
-            if char == b';':
-                break
+            if char == b';': # is there a completed message for somewhere
+                break        # it's best to jump on the back of the train
         time.sleep(0.25)
         i = i + 1
         if i > 10:
-            break;        # Read a single character looking for end of last message on bus
+            break;  
 
-    time.sleep(0.25)
-    ser.flushInput()    # flush the buffer
-    ser.write(b"BN;")   # add a car to the train
-    time.sleep(0.25)
+    band_poll_K3()    # add a car to the train
     
     # Read characters from the serial port until a certain condition is met
     data = b''
