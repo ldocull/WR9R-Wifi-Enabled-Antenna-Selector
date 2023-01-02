@@ -8,12 +8,15 @@
 import serial
 import requests
 import time
+import tkinter as tk
+import winsound
 
 MY_SWITCH_URL = "http://192.168.1.179/"
 MY_K3_COMM_PORT = "COM4"
 MY_KAT500_COMM_PORT = "COM13"
 MY_COMM_RATE = "38400"
-MY_AUTOTUNE_ENABLE = "Y" # Y = Enabled
+MY_AUTOTUNE_ENABLE = "Y"    # Y = Enabled
+MY_TUNING_FULL_AUTO = "N"   # Y = Enabled
 
 ## This is the WR9R operating situation
 band_LUT = [
@@ -34,6 +37,7 @@ band_LUT = [
     [b'BN09',   "TWO",     3,  b'AN2;MDM;T;'],    # 10M   HexBeam
     [b'BN10',   "TWO",     3,  b'AN2;MDM;T;']     #  6M   HexBeam
 ]
+
 
 tunerConfig = b''
 
@@ -60,34 +64,51 @@ def get_tune_request(string):
     # Return None if the string is not found
     return None
 
-
 # Apply low-power TUNE signal to allow antenna tuners to adjust
-def tune(secs):
+def tune_default(secs):
     print("Tuning...")
     time.sleep(1)            
     K3ser.write(b"SWH16;")
     time.sleep(secs)            
     K3ser.write(b"SWH16;")
     print("Complete")
-    return None
+
+def tune_popup(secs):
+    window = tk.Tk()
+    window.title("ALERT")
+    window.geometry("300x100")
+    label = tk.Label(text="Shall we Tune?!")
+    label.pack()
+    winsound.Beep(440, 500)
+    close_button = tk.Button(text="Skip", command=window.destroy)
+    close_button.pack()
+    def tuneit():
+        print("Tuning up for %d.." % secs)
+        time.sleep(1)            
+        K3ser.write(b"SWH16;")
+        time.sleep(secs)            
+        K3ser.write(b"SWH16;")
+        print("Complete")
+        window.destroy()
+        
+    do_something_button = tk.Button(text="TUNE!", command=tuneit)
+    do_something_button.pack()
+  
 
 def band_poll_K3():
     time.sleep(0.25)
     K3ser.flushInput()
     K3ser.write(b"BN;")   # request band currently selected
     time.sleep(0.25)
-    return None
 
 def freq_poll_K3():
     time.sleep(0.25)
     K3ser.flushInput()
     K3ser.write(b"FA;")   # request the current dial frequency
     time.sleep(0.25)
-    return None
 
 def setWR9R(data):
     reply = get_band_select(data)
-    tune_request  = get_tune_request(data)  # get desired settings
     if reply != None:
         response = requests.get(url + reply)
     else:
@@ -98,18 +119,23 @@ def setWR9R(data):
     elif response.status_code == 200:
         print("Success!")
         # Now issue a 'Tune' to set auto-antenna tuning
-        if MY_AUTOTUNE_ENABLE == "Y":
-            if tune_request != 0:
-                tune(tune_request)
+        tuningTime = get_tune_request(data)  # get desired settings
+        if MY_AUTOTUNE_ENABLE == "Y" and tuningTime != 0:
+            if MY_TUNING_FULL_AUTO == "Y":
+                tune_default(tuningTime)
+            else:
+                tune_popup(tuningTime)
+                tk.mainloop()
+                
     elif response.status_code == 404:
         print("Resource not found!")
     else:
         print("Error!")
-    return None
+
             
 #wait for virtual ports to open on startup..
-print "01-01-2023  WR9R"
-time.sleep(5)
+print ("01-01-2023  WR9R")
+##time.sleep(5)
 
 # Open the serial port at 9600 baud rate
 K3ser = serial.Serial(MY_K3_COMM_PORT, baudrate=MY_COMM_RATE)   # K3 Connect
@@ -134,7 +160,7 @@ while True:
 ##        if i > 10:
         break;  
 
-    print "[" + junkstr + "]"
+    print ('[' + junkstr.decode() + ']')
 
     band_poll_K3()    # add a car to the train
     
@@ -151,17 +177,14 @@ while True:
         data += char
         time.sleep(0.25)
 
-##    print data
-    
     # Validate the response before going further..
-    if data!=last_data and len(data)>=4:
-        if data[0]==b'B' and data[1]==b'N':
-            response = 0
-            print("{"+data+"}")
-            # Now set the WR9R antenna switch based on newly selected band
-            setWR9R(data)
+    if ((data!=last_data) and (len(data.decode())>=4) and (data[0]==ord('B')) and (data[1]==ord('N'))):
+        response = 0
+        print("{"+data.decode()+"}")
+        # Now set the WR9R antenna switch based on newly selected band
+        setWR9R(data)
 ##            freq_poll_K3()
-            last_data = data
+    last_data = data
         
     # 1-second poll time is quick enough
     time.sleep(1)
