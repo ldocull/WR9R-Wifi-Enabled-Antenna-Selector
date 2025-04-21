@@ -1,1 +1,7 @@
+This upgrade allows the antenna selector to also directly monitor the K3.. allows for better responsiveness 
+with band changes (does not have to rely on wifi). So, when running stuff like VarAC, no additional apps are requred for
+monitoring and controlling the switch wirelessly. (Set the manual switch to position 5 to enable this function. 
+Otherwise, everything is the same.)
 
+73,
+WR9R
