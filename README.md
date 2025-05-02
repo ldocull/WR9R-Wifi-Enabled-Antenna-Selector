@@ -41,3 +41,7 @@ The buttons on the main screen can be renamed at any time. Just go to **htpps://
 73
 -[WR9R](http://wr9r.com/) 
 
+
+___
+Let us know that this work has been helpful to you.  Any proceeds will be used to offset expenses and further the art. 
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GLAHSMYYJJJAU&source=url)
